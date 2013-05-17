@@ -25,6 +25,13 @@ body {
         background-color: black;
         }
 
+#header {
+    text-align: center;
+    color: #d3d3d3;
+    font-size: 18px;
+    padding: 5px 5px 5px 5px;
+}
+
 #trimet {
     overflow: scroll;
     }
@@ -173,7 +180,7 @@ body {
                 #trimet.small #stops .stop .details div.description {
                     display: inline-block;
                     padding-bottom: 0px;
-                    font-size: 12px;
+                    font-size: 18px;
                     }
             #stops .stop .details div.direction {
                 display: inline-block;

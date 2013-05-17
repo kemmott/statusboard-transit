@@ -38,6 +38,7 @@ class ClarendonRoutes < Sinatra::Base
   </script>
 </head>
 <body>
+<div id='header'>Transit Info</div>
     <div id='trimet' class='small'>
         <div id='stops'>
 			<div id='stop_1' class='stop westbound'>
@@ -81,6 +82,7 @@ class ClarendonRoutes < Sinatra::Base
 			</div>
         </div>
     </div>
+    <div id='header'>Want more bus lines listed?<br/>Ask Kevan.</div>
 </body>
 </html>"
 
