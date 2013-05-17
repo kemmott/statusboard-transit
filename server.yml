@@ -1,0 +1,6 @@
+---
+environment: production
+daemonize: true
+timeout: 30
+port: 11130
+max_persistent_conns: 512

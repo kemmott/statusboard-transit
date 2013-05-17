@@ -1,0 +1,227 @@
+@font-face {
+    font-family: "Roadgeek 2005 Series C";
+    src: url("/fonts/roadgeek-2005-series-c.otf");
+}
+@font-face {
+    font-family: "Roadgeek 2005 Series D";
+    src: url("/fonts/roadgeek-2005-series-d.otf");
+}
+@font-face {
+    font-family: "Roadgeek 2005 Series EM";
+    src: url("/fonts/roadgeek-2005-series-em.otf");
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roadgeek 2005 Series C";
+    color: white;
+    overflow: hidden;
+    -webkit-user-select: none;
+    cursor: default;
+    }
+    body.contained {
+        background-color: black;
+        }
+
+#trimet {
+    overflow: scroll;
+    }
+    #trimet:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+    body.contained #trimet {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 5px;
+        border: 1px solid hsl(0, 0%, 10%);
+        background-color: black;
+        background-image: -webkit-linear-gradient(top, hsl(0, 0%, 20%), hsl(0, 0%, 5%) 128px, black 128px, black 100%);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.6);
+        -webkit-overflow-scrolling: touch;
+        }
+
+
+#stops {
+    }
+    #stops .stop {
+        position: relative;
+        float: left;
+        width: 145px;
+        height: 72px;
+        margin: 10px 10px 10px 10px;
+        padding: 14px 10px 14px 75px;
+        border: 1px solid hsl(0, 0%, 5%);
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background: hsl(0, 0%, 10%);
+        -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 1.0), inset 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+        #trimet.small #stops .stop {
+            margin: 2px 5px 8px 5px;
+            padding: 5px 5px 5px 70px;
+            width: 165px;
+            height: 42px;
+            }
+        body.contained #stops .stop {
+            float: none;
+            width: auto;
+            }
+        #stops .stop .details {
+            padding-bottom: 13px;
+            }
+            #trimet.small #stops .stop .details {
+                padding-bottom: 5px;
+                }
+            #stops .stop .details:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+            #stops .stop .details header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 0 0 0 10px;
+                width: 50px;
+                height: 94px;
+                font-size: 36px;
+                text-align: center;
+                line-height: 100px;
+                background-image: -webkit-linear-gradient(top, hsl(210, 80%, 60%), hsl(210, 100%, 40%));
+                border: 3px solid white;
+                border-top-left-radius: 50px;
+                border-bottom-left-radius: 50px;
+                }
+            #stops .stop .details header#orange{
+                background-image: -webkit-linear-gradient(top, hsl(30, 80%, 60%), hsl(30, 100%, 40%));
+            }
+                #trimet.small #stops .stop .details header {
+                    height: 48px;
+                    font-size: 32px;
+                    line-height: 54px;
+                    border: 2px solid white;
+                    }
+/*
+                #stops .stop.westbound .details header {
+                    background-image: -webkit-linear-gradient(top, hsl(210, 80%, 60%), hsl(210, 100%, 40%));
+                    }
+                #stops .stop.eastbound .details header {
+                    background-image: -webkit-linear-gradient(top, hsl(45, 80%, 50%), hsl(45, 100%, 30%));
+                    }
+                #stops .stop.northbound .details header {
+                    background-image: -webkit-linear-gradient(top, hsl(120, 80%, 60%), hsl(120, 100%, 40%));
+                    }
+                #stops .stop.southbound .details header {
+                    background-image: -webkit-linear-gradient(top, hsl(0, 80%, 60%), hsl(0, 100%, 40%));
+                    }
+*/
+            #stops .stop .details div.dir-bubble {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                width: 20px;
+                height: 20px;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 13px;
+                font-weight: bold;
+                text-align: center;
+                line-height: 20px;
+                color: hsl(210, 100%, 50%);
+                background: white;
+                border-radius: 24px;
+                }
+            #stops .stop .details div.dir-bubble#orange {
+                color: hsl(30, 100%, 50%);
+                }
+
+                #trimet.small #stops .stop .details div.dir-bubble {
+                    top: 18px;
+                    left: -4px;
+                    width: 16px;
+                    height: 16px;
+                    font-size: 11px;
+                    line-height: 16px;
+                    }
+/*
+                #stops .stop.westbound .details div.dir-bubble {
+                    color: hsl(210, 100%, 50%);
+                    background-image: -webkit-linear-gradient(top, hsl(210, 80%, 60%), hsl(210, 100%, 40%));
+                    }
+                #stops .stop.eastbound .details div.dir-bubble {
+                    color: hsl(45, 100%, 40%);
+                    background-image: -webkit-linear-gradient(top, hsl(40, 80%, 60%), hsl(40, 100%, 40%));
+                    }
+                #stops .stop.northbound .details div.dir-bubble {
+                    color: hsl(120, 100%, 50%);
+                    background-image: -webkit-linear-gradient(top, hsl(120, 80%, 60%), hsl(120, 100%, 40%));
+                    }
+                #stops .stop.southbound .details div.dir-bubble {
+                    color: hsl(0, 100%, 50%);
+                    background-image: -webkit-linear-gradient(top, hsl(0, 80%, 60%), hsl(0, 100%, 40%));
+                    }
+*/
+            #stops .stop .details div.description {
+                padding-right: 5px;
+                padding-bottom: 2px;
+                font-size: 15px;
+                color: hsl(0, 5%, 80%);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                }
+                #trimet.small #stops .stop .details div.description {
+                    display: inline-block;
+                    padding-bottom: 0px;
+                    font-size: 12px;
+                    }
+            #stops .stop .details div.direction {
+                display: inline-block;
+                padding-right: 5px;
+                padding-bottom: 2px;
+                font-size: 12px;
+                color: hsl(0, 5%, 60%);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                }
+                #trimet.small #stops .stop .details div.direction {
+                    display: none;
+                    padding-bottom: 0px;
+                    font-size: 11px;
+                    }
+            #stops .stop .details div.locid {
+                display: inline-block;
+                padding-right: 5px;
+                padding-bottom: 2px;
+                font-size: 12px;
+                color: hsl(0, 5%, 60%);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                }
+                #trimet.small #stops .stop .details div.locid {
+                    display: none;
+                    padding-bottom: 0px;
+                    font-size: 10px;
+                    }
+        #stops .stop .arrivals {
+            
+            }
+            #stops .stop .arrivals:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+            #stops .stop .arrivals .arrival {
+                display: inline-block;
+                padding-right: 10px;
+                font-size: 18px;
+                color: hsl(0, 5%, 40%);
+                }
+            #stops .stop .arrivals .arrival:first-child {
+                display: inline-block;
+                padding-right: 10px;
+                font-size: 30px;
+                color: white;
+                }
+                #trimet.small #stops .stop .arrivals .arrival:first-child {
+                    font-size: 28px;
+                    }
+;
