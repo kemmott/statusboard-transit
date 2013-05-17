@@ -32,7 +32,7 @@ class ClarendonRoutes < Sinatra::Base
   <meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
   <meta name='apple-mobile-web-app-capable' content='yes' />
     
-  <link rel='stylesheet' type='text/css' href='/css/style.css' />
+  <link rel='stylesheet' type='text/css' href='/transit/css/style.css' />
   <script language='javascript'>
   	setTimeout('window.location.reload(true)', 60000);
   </script>
