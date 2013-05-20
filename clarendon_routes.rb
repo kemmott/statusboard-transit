@@ -56,7 +56,7 @@ class ClarendonRoutes < Sinatra::Base
   </script>
 </head>
 <body>
-<div id='header'>Transit Info</div>
+<div id='header'>Transit Info (#{Time.now.strftime("%H:%M")})</div>
     <div id='trimet' class='small'>
         <div id='stops'>
 			<div id='stop_1' class='stop westbound'>
