@@ -4,21 +4,37 @@ require 'nokogiri'
 
 class ClarendonRoutes < Sinatra::Base
 
-	get '/' do
-		page_38b_west = RestClient.get("http://wmata.nextbus.com/customStopSelector/fancyNewPredictionLayer.jsp?a=wmata&r=38B&d=38B_38B_0&s=4880&ts=4823")
-	    npage_38b_west = Nokogiri::HTML(page_38b_west)
-	    time1_38b_west = npage_38b_west.css(".firstPrediction").text.match("[0-9]+|Arriving").to_s
-	    time2_38b_west = npage_38b_west.css(".secondaryPredictions")[0].text.match("[0-9]+").to_s
+	get '/stock' do
+		resp = RestClient.get("http://www.google.com/ig/api?stock=COF&stock=AAPL")
+		doc = Nokogiri::XML(resp)
+		"COF,#{doc.css('last')[1].attributes['data'].value}\nAAPL,#{a_doc.css('last')[0].attributes['data'].value}"
+	end
 
-	    page_orange = RestClient.get("http://www.wmata.com/rider_tools/pids/showpid.cfm?station_id=97")
-	    npage_orange = Nokogiri::HTML(page_orange)
-	    time1_orange_west = npage_orange.css("table")[1].css("tbody tr td")[3].text.match("[0-9]+|ARR|BRD").to_s
-	    if npage_orange.css("table")[1].css("tbody tr td")[7]
-		    time2_orange_west = npage_orange.css("table")[1].css("tbody tr td")[7].text.match("[0-9]+").to_s
+	get '/' do
+		begin
+			page_38b_west = RestClient.get("http://wmata.nextbus.com/customStopSelector/fancyNewPredictionLayer.jsp?a=wmata&r=38B&d=38B_38B_0&s=4880&ts=4823")
+		rescue StandardError=>e
+			puts "[#{Time.now}] Bus REST Error: #{e}"
+		else
+		    npage_38b_west = Nokogiri::HTML(page_38b_west)
+		    time1_38b_west = npage_38b_west.css(".firstPrediction").text.match("[0-9]+|Arriving").to_s
+		    time2_38b_west = npage_38b_west.css(".secondaryPredictions")[0].text.match("[0-9]+").to_s
 		end
-	    time1_orange_east = npage_orange.css("table")[0].css("tbody tr td")[3].text.match("[0-9]+|ARR|BRD").to_s
-	    if npage_orange.css("table")[0].css("tbody tr td")[7]
-		    time2_orange_east = npage_orange.css("table")[0].css("tbody tr td")[7].text.match("[0-9]+").to_s
+
+	    begin
+	    	page_orange = RestClient.get("http://www.wmata.com/rider_tools/pids/showpid.cfm?station_id=97")
+		rescue StandardError=>e
+			puts "[#{Time.now}] Orange Line REST Error: #{e}"
+		else
+		    npage_orange = Nokogiri::HTML(page_orange)
+		    time1_orange_west = npage_orange.css("table")[1].css("tbody tr td")[3].text.match("[0-9]+|ARR|BRD").to_s
+		    if npage_orange.css("table")[1].css("tbody tr td")[7]
+			    time2_orange_west = npage_orange.css("table")[1].css("tbody tr td")[7].text.match("[0-9]+").to_s
+			end
+		    time1_orange_east = npage_orange.css("table")[0].css("tbody tr td")[3].text.match("[0-9]+|ARR|BRD").to_s
+		    if npage_orange.css("table")[0].css("tbody tr td")[7]
+			    time2_orange_east = npage_orange.css("table")[0].css("tbody tr td")[7].text.match("[0-9]+").to_s
+			end
 		end
 
 		puts "[#{Time.now}] 38B W: #{time1_38b_west} - #{time2_38b_west}, O W: #{time1_orange_west} - #{time2_orange_west}, O E: #{time1_orange_east} - #{time2_orange_east}"
