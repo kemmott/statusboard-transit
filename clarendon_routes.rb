@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'rest-client'
 require 'nokogiri'
+require 'tzinfo'
 
 class ClarendonRoutes < Sinatra::Base
 
@@ -11,6 +12,7 @@ class ClarendonRoutes < Sinatra::Base
 	end
 
 	get '/' do
+		tz = TZInfo::Timezone.get('America/New_York')
 		begin
 			page_38b_west = RestClient.get("http://wmata.nextbus.com/customStopSelector/fancyNewPredictionLayer.jsp?a=wmata&r=38B&d=38B_38B_0&s=4880&ts=4823")
 		rescue StandardError=>e
@@ -56,7 +58,7 @@ class ClarendonRoutes < Sinatra::Base
   </script>
 </head>
 <body>
-<div id='header'>Transit Info (#{Time.now.strftime("%H:%M")})</div>
+<div id='header'>Transit Info (#{tz.utc_to_local(Time.now.utc).strftime("%H:%M")})</div>
     <div id='trimet' class='small'>
         <div id='stops'>
 			<div id='stop_1' class='stop westbound'>
