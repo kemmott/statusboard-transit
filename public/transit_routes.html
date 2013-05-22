@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+<head>
+  <title>Clarendon WMATA</title>
+    
+  <meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <meta name='apple-mobile-web-app-capable' content='yes' />
+    
+  <link rel='stylesheet' type='text/css' href='css/style.css' />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script language="javascript">
+
+function update() {
+	var rightnow = new Date();
+	$(header).text("Transit Info ("+rightnow.getHours()+":"+rightnow.getMinutes()+")")
+	url = document.URL.substring(0,document.URL.lastIndexOf('/')) + '/routes';
+	$.getJSON(url, function(data) {
+		$(stop_1).children(".arrivals").children(".arrival").first().text($(data)[0].transit_times[0].directions[0].times[0]+" min");
+		$(stop_1).children(".arrivals").children(".arrival").next().text($(data)[0].transit_times[0].directions[0].times[1]+"min");
+		$(stop_2).children(".arrivals").children(".arrival").first().text($(data)[0].transit_times[1].directions[0].times[0]+" min");
+		$(stop_2).children(".arrivals").children(".arrival").next().text($(data)[0].transit_times[1].directions[0].times[1]+"min");
+		$(stop_3).children(".arrivals").children(".arrival").first().text($(data)[0].transit_times[1].directions[1].times[0]+" min");
+		$(stop_3).children(".arrivals").children(".arrival").next().text($(data)[0].transit_times[1].directions[1].times[1]+"min");
+		console.log("ok");
+	})
+}
+
+function startUpdateTimer() {
+	update();
+	setTimeout(startUpdateTimer, 60000);
+}
+
+$(function() {
+	startUpdateTimer();
+})
+
+  </script>
+</head>
+<body>
+<div id='header'>Transit Info (TIME NOW)</div>
+    <div id='trimet' class='small'>
+        <div id='stops'>
+			<div id='stop_1' class='stop westbound'>
+				<div class='details'>
+					<header class='route'>38B</header>
+					<div class='dir-bubble' style="">W</div>
+					<div class='description'>Wilson &amp; N Herndon</div>
+					<div class='direction'>Westbound</div>
+					<div class='locid'>1</div>
+				</div>
+				<div class='arrivals'>
+					<div class='arrival'></div>
+					<div class='arrival'></div>
+				</div>
+			</div>
+			<div id='stop_2' class='stop westbound'>
+				<div class='details'>
+					<header id='orange' class='route'>Or.</header>
+					<div id='orange' class='dir-bubble' style="">W</div>
+					<div class='description'>Clarendon &amp; N Highland</div>
+					<div class='direction'>Westbound</div>
+					<div class='locid'>2</div>
+				</div>
+				<div class='arrivals'>
+					<div class='arrival'></div>
+					<div class='arrival'></div>
+				</div>
+			</div>
+			<div id='stop_3' class='stop eastbound'>
+				<div class='details'>
+					<header id='orange' class='route'>Or.</header>
+					<div id='orange' class='dir-bubble' style="">E</div>
+					<div class='description'>Clarendon &amp; N Highland</div>
+					<div class='direction'>Eastbound</div>
+					<div class='locid'>3</div>
+				</div>
+				<div class='arrivals'>
+					<div class='arrival'></div>
+					<div class='arrival'></div>
+				</div>
+			</div>
+        </div>
+    </div>
+    <div id='footer'>Want more bus lines listed?<br/>Ask Kevan.</div>
+</body>
+</html>
